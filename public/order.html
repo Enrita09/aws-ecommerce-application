@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/products.html">Products</a>
+    <a href="/order.html">Order</a>
+    <a href="/orders.html">Orders</a>
+</nav>
+
+<div class="container">
+
+    <p class="eyebrow">Secure checkout</p>
+    <h1>Place Order</h1>
+    <p>Enter your details and the product you would like to purchase.</p>
+
+    <form id="orderForm">
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Customer Name"
+            required
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            type="text"
+            id="product"
+            placeholder="Product"
+            required
+        >
+
+        <input
+            type="number"
+            id="quantity"
+            placeholder="Quantity"
+            required
+        >
+
+        <button type="submit">
+            Place Order
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+document.getElementById("orderForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const data = {
+
+        customer_name:
+            document.getElementById("name").value,
+
+        email:
+            document.getElementById("email").value,
+
+        product:
+            document.getElementById("product").value,
+
+        quantity:
+            document.getElementById("quantity").value
+    };
+
+    const response = await fetch('/api/orders', {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify(data)
+
+    });
+
+    const result = await response.json();
+
+    window.location.href =
+        "/confirmation.html?id=" + result.id;
+
+});
+
+</script>
+
+</body>
+</html>

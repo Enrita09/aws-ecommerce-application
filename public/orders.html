@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders | Mini E-Commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/products.html">Products</a>
+    <a href="/order.html">Order</a>
+    <a href="/orders.html">Orders</a>
+</nav>
+
+<div class="container">
+
+    <p class="eyebrow">Order history</p>
+    <h1>Orders</h1>
+    <p>Review recent customer orders in a clean, scannable layout.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="ordersTable">
+            <tr>
+                <td colspan="5">Loading orders...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="actions">
+        <a class="button" href="/order.html">New Order</a>
+    </div>
+
+</div>
+
+<script>
+
+async function loadOrders() {
+    const table = document.getElementById("ordersTable");
+
+    try {
+        const response = await fetch("/api/orders");
+        const orders = await response.json();
+
+        table.innerHTML = orders.map(order => `
+            <tr>
+                <td>#${order.id}</td>
+                <td>${order.customer_name}</td>
+                <td>${order.product}</td>
+                <td>${order.quantity}</td>
+                <td>${order.status}</td>
+            </tr>
+        `).join("");
+    } catch (error) {
+        table.innerHTML = `
+            <tr>
+                <td colspan="5">Unable to load orders.</td>
+            </tr>
+        `;
+    }
+}
+
+loadOrders();
+
+</script>
+
+</body>
+</html>

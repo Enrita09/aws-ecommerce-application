@@ -1,0 +1,15 @@
+{
+    "name": "mini-ecommerce-store",
+    "version": "1.0.0",
+    "description": "A mini ecommerce store UI with order submission.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.864.0",
+        "@aws-sdk/lib-dynamodb": "^3.864.0",
+        "express": "^4.18.3"
+    }
+}

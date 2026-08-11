@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/products.html">Products</a>
+    <a href="/order.html">Order</a>
+    <a href="/orders.html">Orders</a>
+</nav>
+
+<div class="container">
+
+    <p class="eyebrow">Order confirmed</p>
+    <h1>Order Successful!</h1>
+
+    <p>Your order has been placed successfully.</p>
+
+    <p id="orderId"></p>
+
+    <div class="actions">
+        <a class="button" href="/orders.html">View Orders</a>
+        <a class="button secondary" href="/products.html">Continue Shopping</a>
+    </div>
+
+</div>
+
+<script>
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+document.getElementById("orderId").innerText =
+    "Order ID: " + id;
+
+</script>
+
+</body>
+</html>
