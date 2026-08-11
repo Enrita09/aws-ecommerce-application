@@ -81,6 +81,21 @@ app.get("/api/health", (req, res) => {
     });
 });
 
+app.get("/api/products", async (req, res) => {
+    try {
+        const result = await dynamo.send(new ScanCommand({
+            TableName: "Products"
+        }));
+
+        res.json(result.Items || []);
+    } catch (error) {
+        console.error("Failed to load products:", error);
+        res.status(500).json({
+            error: "Unable to load products."
+        });
+    }
+});
+
 app.get("/api/orders", async (req, res) => {
     try {
         const orders = await getOrders();
